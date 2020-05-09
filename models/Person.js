@@ -37,7 +37,8 @@ const PersonSchema = mongoose.Schema({
       validator: dateOfBirth => validateDob(dateOfBirth),
       message: () => "age must be greater than 16 and less than 120 years"
     }
-  }
+  },
+  createdAt: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model("Person", PersonSchema);

@@ -31,10 +31,12 @@ npm install
 npm start
 ```
 
-- Make requests to the different endpoints, e.g
+- Make requests to the different endpoints
 
 ```
 GET http://localhost:3000/api/persons
+GET http://localhost:3000/api/persons/latest (returns most recent addition)
+POST http://localhost:3000/api/persons
 ```
 
 ### Automated Tests

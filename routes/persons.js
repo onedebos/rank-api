@@ -4,8 +4,15 @@ const helper = require("../middleware/helpers");
 let Person = require("../models/Person");
 
 router.route("/").get((req, res) => {
-  console.log("getting all persons...");
   Person.find()
+    .then(persons => res.json(persons))
+    .catch(err => res.status(400).json("Error: " + err));
+});
+
+router.route("/latest").get((req, res) => {
+  Person.find()
+    .sort({ createdAt: "desc" })
+    .limit(1)
     .then(persons => res.json(persons))
     .catch(err => res.status(400).json("Error: " + err));
 });
@@ -16,17 +23,16 @@ router.route("/:id").get((req, res) => {
     .catch(err => res.status(400).json("Error:" + err));
 });
 
-router.route("/latest").get((req, res) => {
-  Person.findOne()
-    .sort({ field: "asc", _id: -1 })
-    .limit(1)
-    .then(person => res.json(person))
-    .catch(err => res.status(400).json("Error: " + err));
+router.route("/:id").delete((req, res) => {
+  Person.findByIdAndDelete(req.params.id)
+    .then(() => res.status(200).json({ message: "Person has been deleted!" }))
+    .catch(() =>
+      res.status(400).json("Error: Couldn't find a person with that ID")
+    );
 });
 
 router.route("/").post((req, res) => {
-  const name = req.body.name;
-  const email = req.body.email;
+  const { name, email } = req.body;
   const dateOfBirth = new Date(req.body.dateOfBirth);
   const data = {
     from: "Adebola <me@samples.mailgun.org>",
