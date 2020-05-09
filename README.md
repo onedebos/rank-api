@@ -5,7 +5,7 @@ API.
 
 ## Video demo
 
-![](./rank-final.gif)
+![](./rank-api.gif)
 
 ## Getting Started
 
