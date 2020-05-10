@@ -16,8 +16,7 @@ router.route("/latest").get((req, res) => {
     .sort({ createdAt: "desc" })
     .limit(1)
     .then(persons => {
-      res.json(persons.map(person => person.toJSON()));
-      connection.close();
+      res.json(persons);
     })
     .catch(err => res.status(400).json("Error: " + err));
 });
@@ -25,10 +24,19 @@ router.route("/latest").get((req, res) => {
 router.route("/:id").get((req, res) => {
   Person.findById(req.params.id)
     .then(person => {
-      res.json(person.map(person => person.toJSON()));
-      connection.close();
+      res.json(person);
     })
     .catch(err => res.status(400).json("Error:" + err));
+});
+
+router.route("/:id").delete((req, res) => {
+  Person.findByIdAndDelete(req.params.id)
+    .then(() => {
+      res.status(200).json({ message: "Person has been deleted!" });
+    })
+    .catch(() =>
+      res.status(400).json("Error: Couldn't find a person with that ID")
+    );
 });
 
 router.route("/").post((req, res) => {
@@ -57,7 +65,6 @@ router.route("/").post((req, res) => {
       res.json(newPerson.toJSON());
       helper.appendData(newPerson);
       // helper.sendEmail(data);
-      connection.close();
     })
     .catch(err => res.status(400).json("Error: " + err));
 });

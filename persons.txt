@@ -18,4 +18,9 @@
   email: 'tomhanks@gmail.com',
   dateOfBirth: 2000-02-12T00:00:00.000Z,
   createdAt: 2020-05-10T20:21:31.509Z,
+  __v: 0 }{ _id: 5eb866e0b0e29d1b799ed30e,
+  name: 'Tom Hanks',
+  email: 'tomhanks@gmail.com',
+  dateOfBirth: 2000-02-12T00:00:00.000Z,
+  createdAt: 2020-05-10T20:41:04.568Z,
   __v: 0 }
