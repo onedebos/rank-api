@@ -64,7 +64,7 @@ router.route("/").post((req, res) => {
     .then(() => {
       res.json(newPerson.toJSON());
       helper.appendData(newPerson);
-      // helper.sendEmail(data);
+      helper.sendEmail(data);
     })
     .catch(err => res.status(400).json("Error: " + err));
 });
