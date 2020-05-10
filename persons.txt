@@ -13,4 +13,9 @@
   email: 'tomhanks@gmail.com',
   dateOfBirth: 2000-02-12T00:00:00.000Z,
   createdAt: 2020-05-10T14:40:55.479Z,
+  __v: 0 }{ _id: 5eb8624bd886871678fe8cfe,
+  name: 'Tom cleverly',
+  email: 'tomhanks@gmail.com',
+  dateOfBirth: 2000-02-12T00:00:00.000Z,
+  createdAt: 2020-05-10T20:21:31.509Z,
   __v: 0 }

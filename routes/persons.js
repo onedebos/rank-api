@@ -7,7 +7,7 @@ const connection = mongoose.connection;
 
 router.route("/").get((req, res) => {
   Person.find()
-    .then(persons => res.json(persons))
+    .then(persons => res.json(persons.map(person => person.toJSON())))
     .catch(err => res.status(400).json("Error: " + err));
 });
 
@@ -29,17 +29,6 @@ router.route("/:id").get((req, res) => {
       connection.close();
     })
     .catch(err => res.status(400).json("Error:" + err));
-});
-
-router.route("/:id").delete((req, res) => {
-  Person.findByIdAndDelete(req.params.id)
-    .then(() => {
-      res.status(200).json({ message: "Person has been deleted!" });
-      connection.close();
-    })
-    .catch(() =>
-      res.status(400).json("Error: Couldn't find a person with that ID")
-    );
 });
 
 router.route("/").post((req, res) => {
