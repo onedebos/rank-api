@@ -17,7 +17,7 @@ const validateDob = dateOfBirth => {
   }
 };
 
-const PersonSchema = mongoose.Schema({
+const PersonSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -39,6 +39,14 @@ const PersonSchema = mongoose.Schema({
     }
   },
   createdAt: { type: Date, default: Date.now }
+});
+
+PersonSchema.set("toJSON", {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString();
+    delete returnedObject._id;
+    delete returnedObject.__v;
+  }
 });
 
 module.exports = mongoose.model("Person", PersonSchema);
