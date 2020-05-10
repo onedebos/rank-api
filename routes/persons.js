@@ -16,7 +16,7 @@ router.route("/latest").get((req, res) => {
     .sort({ createdAt: "desc" })
     .limit(1)
     .then(persons => {
-      res.json(persons);
+      res.json(persons.map(person => person.toJSON()));
     })
     .catch(err => res.status(400).json("Error: " + err));
 });
@@ -24,7 +24,7 @@ router.route("/latest").get((req, res) => {
 router.route("/:id").get((req, res) => {
   Person.findById(req.params.id)
     .then(person => {
-      res.json(person);
+      res.json(person.toJSON());
     })
     .catch(err => res.status(400).json("Error:" + err));
 });
